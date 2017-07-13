@@ -30,3 +30,6 @@ Your application will now be running at localhost.
 ### Load Test Result
 * 1 User: 13ms average for 10k sample queries
 * 5 User: 20ms average for 10k sample queries
+
+### Note
+The loadtest result were recorded on localhost.
