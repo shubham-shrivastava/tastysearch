@@ -4,6 +4,8 @@ from search.models import Reviews
 review_list = pickle.load(open("reviewcollection.p", "rb"))
 keywords_hash_map = pickle.load(open("indexedDict.p", "rb"))
 
+if review_list and keywords_hash_map:
+    print("file loaded")
 
 def fetchReviewData(query):
     multi_keyword = {}
