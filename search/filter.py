@@ -22,6 +22,7 @@ def fetchReviewData(query):
             filtered_review_list.extend(list_of_appearing_index)
     filtered_review_list = list(set(filtered_review_list))
 
+# This loop will generate a dictionary that will contain the indexes associted with the query.
     for word in query:
         if word in keywords_hash_map:
             list_of_appearing_index = keywords_hash_map[word]
@@ -29,6 +30,7 @@ def fetchReviewData(query):
             multi_keyword.update({word: common})
 
     count = 0
+    
     for word in query:
         if word in keywords_hash_map:
             for common_index in multi_keyword[word]:

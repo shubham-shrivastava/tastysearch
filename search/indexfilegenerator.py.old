@@ -1,9 +1,6 @@
 import re
 from search.reviews_collection import ReviewCollectionGenerator
 
-# Index is built for the dataset, suitable for implementing search
-# a hashMap that maps any given keyword with the list of review objects in the ReviewCollection
-# Container that contains the keyword
 import dbm
 from collections import defaultdict
 import pickle
