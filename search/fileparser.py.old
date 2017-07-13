@@ -1,0 +1,46 @@
+from search.reviews_collection import ReviewCollectionGenerator
+import dbm
+import pickle
+from search.reviews_model import Reviews
+
+
+def pickleReviews():
+    count = 0
+    flag = True
+    review_list = open("sampled.txt")
+    reviews_collection_object_list = []
+    review_dict = {}
+    if(flag):
+        for line in review_list:
+            if(line == "\n"):
+                review = Reviews(review_dict["productId"],
+                              review_dict["userId"], review_dict["profileName"],
+                              review_dict["helpfulness"], review_dict["score"],
+                              review_dict["time"], review_dict["summary"],
+                              review_dict["text"])
+                reviews_collection_object_list.append(review)
+                count = count + 1
+                review_dict.clear()
+            else:
+                line = line.split(':')
+                if "productId" in line[0]:
+                    review_dict.update({'productId': line[1].strip()})
+                elif "userId" in line[0]:
+                    review_dict.update({'userId': line[1].strip()})
+                elif "profileName" in line[0]:
+                    review_dict.update({'profileName': line[1].strip()})
+                elif "helpfulness" in line[0]:
+                    review_dict.update({'helpfulness': line[1].strip()})
+                elif "score" in line[0]:
+                    review_dict.update({'score': line[1].strip()})
+                elif "time" in line[0]:
+                    review_dict.update({'time': line[1].strip()})
+                elif "summary" in line[0]:
+                    review_dict.update({'summary': line[1].strip()})
+                elif "text" in line[0]:
+                    review_dict.update({'text': line[1].strip()})
+        pickle.dump(reviews_collection_object_list, open("reviewcollection.p", "wb"))
+        flag = False
+
+def parseReviews():
+    pass

@@ -1,0 +1,17 @@
+for index in filtered_review_list:
+     count = 0
+     for word in query:
+         if word in keywords_hash_map:
+             list_of_appearing_index = keywords_hash_map[term]
+             if index in list_of_appearing_index:
+                 count = count + 1
+     score = count / n
+     if score not in score_list and count > 0:
+         score_list.append(score)
+         list_index = []
+         list_index.append(index)
+         result.update({score: list_index})
+     elif score in score_list and count > 0:
+         list_index = result[score]
+         list_index.append(index)
+         result.update({score: list_index})

@@ -1,0 +1,33 @@
+import re
+from search.reviews_collection import ReviewCollectionGenerator
+
+# Index is built for the dataset, suitable for implementing search
+# a hashMap that maps any given keyword with the list of review objects in the ReviewCollection
+# Container that contains the keyword
+import dbm
+from collections import defaultdict
+import pickle
+
+class IndexGenerator:
+    hashMapPersist = defaultdict(int)
+    flag = True
+
+    def __init__(self):
+        self.buildIndexesPersist()
+
+    def buildIndexesPersist(self):
+        if(IndexGenerator.flag):
+            review_list = ReviewCollectionGenerator.review_collection_list
+            review_index = 0
+            for review in review_list:
+                review_text = review.text.split(" ")
+                for word in review_text:
+                    print("Indexing: %s" % word)
+                    if word in IndexGenerator.hashMapPersist:
+                        if review_index not in IndexGenerator.hashMapPersist[word]:
+                            IndexGenerator.hashMapPersist[word].append(review_index)
+                    else:
+                        IndexGenerator.hashMapPersist[word] = [review_index]
+                review_index = review_index + 1
+        IndexGenerator.flag = False
+        pickle.dump(self.hashMapPersist, open("indexedDictLess.p", "wb"))
